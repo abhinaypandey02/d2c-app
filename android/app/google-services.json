@@ -1,0 +1,167 @@
+{
+  "project_info": {
+    "project_number": "893322883008",
+    "firebase_url": "https://freshtables-5ca16-default-rtdb.firebaseio.com",
+    "project_id": "freshtables-5ca16",
+    "storage_bucket": "freshtables-5ca16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:893322883008:android:ab4b5d39d7a1ee17c06225",
+        "android_client_info": {
+          "package_name": "com.freshtablesshop.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "893322883008-8fja7g8t2sfddj4gs145en7n4u40jpbh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freshtablesshop.app",
+            "certificate_hash": "e14f938a98c29050e392102ade96888fcd66d02a"
+          }
+        },
+        {
+          "client_id": "893322883008-dq4g4fo3h80rkmug2urlriic4h3ju5dh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freshtablesshop.app",
+            "certificate_hash": "be2cf3324030c884aeacf0f12fda60ae52fbcec3"
+          }
+        },
+        {
+          "client_id": "893322883008-e4df2l6jtga7vr2vo19q6pii6hbb7bb9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freshtablesshop.app",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "893322883008-pnidhe4aphq8ugsn3c3l9gmtk3g9ksip.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwMJiCI4ENn79W41JWrTXLcAh0pv1umm8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "893322883008-pnidhe4aphq8ugsn3c3l9gmtk3g9ksip.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "893322883008-bodquofadsbd0m7gnmth878icg9uc49o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.freshtablesv2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:893322883008:android:2c05c3dd4466ff24c06225",
+        "android_client_info": {
+          "package_name": "com.freshtablesshop.delivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "893322883008-pnidhe4aphq8ugsn3c3l9gmtk3g9ksip.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwMJiCI4ENn79W41JWrTXLcAh0pv1umm8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "893322883008-pnidhe4aphq8ugsn3c3l9gmtk3g9ksip.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "893322883008-bodquofadsbd0m7gnmth878icg9uc49o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.freshtablesv2"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:893322883008:android:1de14eb758ce6a56c06225",
+        "android_client_info": {
+          "package_name": "com.freshtablesv2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "893322883008-79cc3s7oln5vsev415e7gi81fhf0njah.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freshtablesv2",
+            "certificate_hash": "be2cf3324030c884aeacf0f12fda60ae52fbcec3"
+          }
+        },
+        {
+          "client_id": "893322883008-8m317s9adu2t5otes40dllma23g8e1et.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freshtablesv2",
+            "certificate_hash": "3810cc86f0deeadc12ccbce54b9b0347705ba44c"
+          }
+        },
+        {
+          "client_id": "893322883008-pdcr0h6lto4rmdebd3vjn3mjl741512v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.freshtablesv2",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "893322883008-pnidhe4aphq8ugsn3c3l9gmtk3g9ksip.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwMJiCI4ENn79W41JWrTXLcAh0pv1umm8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "893322883008-pnidhe4aphq8ugsn3c3l9gmtk3g9ksip.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "893322883008-bodquofadsbd0m7gnmth878icg9uc49o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.freshtablesv2"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
