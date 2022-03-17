@@ -187,8 +187,17 @@ export const getTimeStr = (timeStr) => {
   }
   return datestring;
 }
+export const getB2BOrderUser = (userlist,searchStr)=>{
+  Object.keys(userlist).map((uid) => {
+    if (userlist[uid].phone.toString() === searchStr.toString()) {
+      console.log(193, {...userlist[uid].details,phone:userlist[uid].phone})
+      return {...userlist[uid].details,phone:userlist[uid].phone};
+    }
+  })
+  return null;
+}
 export const getCusomerUser = (userlist,searchStr)=>{
-  let res={name:"",address:"",phone:"",landmark:"",pincode:""};
+  let res=null;
   Object.keys(userlist).map((uid) => {
       if (userlist[uid].phone.toString() === searchStr.toString()) {
         res = userlist[uid];

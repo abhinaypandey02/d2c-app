@@ -24,6 +24,7 @@
     "react-hook-form": "^7.27.1",
     "react-native": "0.66.4",
     "react-native-cardview": "^2.0.5",
+    "react-native-floating-action": "^1.22.0",
     "react-native-gesture-handler": "^2.1.0",
     "react-native-image-picker": "^4.7.3",
     "react-native-material-ripple": "^0.9.1",

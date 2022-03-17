@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View, Image, Alert, ActivityIndicator } from 'react-native'
-import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-handler'
-import Footer from '../../Components/Footer'
-import Template from '../../Components/Template'
+import React, {useEffect, useState} from 'react'
+import {ActivityIndicator, Image, StyleSheet, Text, View} from 'react-native'
+import {ScrollView} from 'react-native-gesture-handler'
 import * as Constants from '../../Constants'
-import { useIsFocused } from "@react-navigation/native";
+import {useIsFocused} from "@react-navigation/native";
 import database from "@react-native-firebase/database";
-import Feather from 'react-native-vector-icons/Feather';
-import { Provider as PaperProviderProd } from 'react-native-paper';
+import {Provider as PaperProviderProd} from 'react-native-paper';
 import Ripple from 'react-native-material-ripple';
 import openMap from "react-native-open-maps";
 
-const OrderDetailsScreen = ({ navigation, }) => {
+const OrderDetailsScreen = ({navigation,}) => {
     let OrderDetail = Constants.AppData.selectedOrder;
-    let userDetails = Constants.getCusomerUser(Constants.AppData.customers,OrderDetail.userid)
+    let userDetails = Constants.getCusomerUser(Constants.AppData.customers, OrderDetail.userid)
     let Units = Constants.AppData.units;
     const isFocused = useIsFocused();
     const [updateUi, setUpdateUi] = useState("")
@@ -31,7 +28,12 @@ const OrderDetailsScreen = ({ navigation, }) => {
         setIsprocessing(true)
         let ostat = OrderDetail.orderStatus;
         let dt = new Date()
-        ostat.push({ time: dt.getTime(), status: "Canceled", msg: "Order delivered by " + Constants.AppData.user.name, deliveryDate: dt.getTime() })
+        ostat.push({
+            time: dt.getTime(),
+            status: "Canceled",
+            msg: "Order delivered by " + Constants.AppData.user.name,
+            deliveryDate: dt.getTime()
+        })
         OrderDetail.status = "Canceled";
         database()
             .ref(`${Constants.dbpath.order}/${OrderDetail.userid}/${OrderDetail.orderid}`)
@@ -42,21 +44,27 @@ const OrderDetailsScreen = ({ navigation, }) => {
             });
     };
     return (
-        <PaperProviderProd style={{ flex: 1 }}>
+        <PaperProviderProd style={{flex: 1}}>
 
-            <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
-                {userDetails.location&&<Ripple style={{margin:10,backgroundColor:"#c9c9c9",padding:20}} onPress={()=>openMap(userDetails.location)}><Text style={{ fontSize: 20, color: "#000", marginLeft: 0, textAlign:"center"}}>Google Map</Text></Ripple>}
+            <View style={{flex: 1, backgroundColor: '#ffffff'}}>
+                {userDetails && userDetails.location &&
+                    <Ripple style={{margin: 10, backgroundColor: "#c9c9c9", padding: 20}}
+                            onPress={() => openMap(userDetails.location)}><Text
+                        style={{fontSize: 20, color: "#000", marginLeft: 0, textAlign: "center"}}>Google
+                        Map</Text></Ripple>}
                 <View style={{
                     justifyContent: "center", width: "100%",
                     alignItems: "center"
                 }}>
-                    <Text style={styles.text}>{OrderDetail.orderid}</Text>
-                    <Text style={styles.text}>{OrderDetail.products.length + " "}item(s)</Text>
-                    <Text style={styles.text}>{Constants.getTimeStr(OrderDetail.createdAt)}</Text>
+                    <Text style={styles.text}>{OrderDetail.orderid ? OrderDetail.orderid : OrderDetail.orderId}</Text>
+                    <Text
+                        style={styles.text}>{OrderDetail.products ? OrderDetail.products.length : OrderDetail.product.length + " "}item(s)</Text>
+                    <Text
+                        style={styles.text}>{Constants.getTimeStr(OrderDetail.createdAt ? OrderDetail.createdAt : OrderDetail.milliseconds)}</Text>
                     <Text style={styles.text}>{OrderDetail.status}</Text>
                 </View>
-                <ScrollView contentContainerStyle={{ flexGrow: 1 }} style={[{ flex: 1 }]}>
-                    <View style={{ flex: 1, paddingHorizontal: 5, marginBottom: 65 }}>
+                <ScrollView contentContainerStyle={{flexGrow: 1}} style={[{flex: 1}]}>
+                    <View style={{flex: 1, paddingHorizontal: 5, marginBottom: 65}}>
                         <View style={{
                             flexDirection: "row", justifyContent: "space-between",
                             borderBottomColor: "#ccc",
@@ -65,60 +73,63 @@ const OrderDetailsScreen = ({ navigation, }) => {
                             alignItems: "center"
                         }}>
 
-                            <Text style={{ fontSize: 20 }}>Total</Text>
-                            <Text style={{ fontSize: 24, color: "#000" }}>₹{OrderDetail.totalAmount}</Text>
+                            <Text style={{fontSize: 20,color:"black"}}>Total</Text>
+                            <Text style={{
+                                fontSize: 24,
+                                color: "#000"
+                            }}>₹{OrderDetail.totalAmount ? OrderDetail.totalAmount : OrderDetail.price}</Text>
                         </View>
-                        {
-                            OrderDetail.products.map((product) => {
-                                let image = Constants.getImages(product.images)[0];
+                        {(() => {
+                            const p = OrderDetail.products ? OrderDetail.products : OrderDetail.product
+                            return p.map((product) => {
+                                let image, price = product.price, prefix=product.prefix, quantity=product.quantity;
+                                if (product.price[0].amount) price = product.price[0].amount
+                                if (product.images) image = Constants.getImages(product.images)[0];
+                                if (product.url) image = {url:product.url}
+                                if(Units[product.price[0].unitid]) prefix=Units[product.price[0].unitid].title
+                                if(quantity.quantity) quantity=quantity.quantity
                                 return (
                                     <View key={Math.random()}
-                                        style={{
-                                            height: 80,
-                                            marginTop: 5,
-                                            flexDirection: 'row',
-                                            alignItems: 'center',
-                                            justifyContent: 'space-between', marginHorizontal: 10,
-                                            width: "100%",
-                                            alignSelf: 'center',
-                                            borderBottomWidth: 1,
-                                            borderBottomColor: "#ccc"
-                                        }}>
+                                          style={{
+                                              height: 140,
+                                              marginTop: 5,
+                                              flexDirection: 'row',
+                                              alignItems: 'center',
+                                              justifyContent: 'space-between', marginHorizontal: 10,
+                                              width: "100%",
+                                              alignSelf: 'center',
+                                              borderBottomWidth: 1,
+                                              borderBottomColor: "#ccc"
+                                          }}>
                                         <View style={{
                                             flexDirection: 'row',
                                             alignItems: "center",
                                             flex: 1.2,
                                         }}>
-                                            <View style={{ width: 60, height: 60, }}>
-                                                {image ? (
-                                                    <Image
-                                                        source={{ uri: image.url }}
-                                                        style={{ width: 60, height: 60, marginLeft: 10, resizeMode: 'cover' }}></Image>
-                                                ) : (
-                                                    <Image
-                                                        source={Constants.localImages.productNotFound}
-                                                        style={{ width: 60, height: 60, marginLeft: 10, resizeMode: 'cover' }}></Image>
-                                                )}
-
-                                            </View>
+                                            <Image
+                                                source={image?{uri: image.url}:Constants.localImages.productNotFound}
+                                                style={{
+                                                    width: 60,
+                                                    height: 60,
+                                                    marginLeft: 10,
+                                                    resizeMode: 'cover'
+                                                }}/>
                                         </View>
-                                        <View style={{ flex: 3, height: "100%", justifyContent: "space-evenly" }}>
-                                            <Text style={{ fontSize: 20, color: "#000", marginLeft: 0, }}>{product.title}</Text>
-                                            <Text>Price:₹{product.price[0].amount + "/" + Units[product.price[0].unitid].title}</Text>
-                                            <Text>Quantity:{product.quantity} {Units[product.price[0].unitid].title}</Text>
-                                            <Text>Amount:₹{product.price[0].amount * product.quantity}</Text>
-                                        </View>
-                                        <View style={{ flex: 1, height: "100%" }}>
-
-
+                                        <View style={{flex: 3, height: "100%", justifyContent: "space-evenly"}}>
+                                            <Text style={styles.productStyle}>{product.title ? product.title : product.productName}</Text>
+                                            <Text style={styles.productStyle}>Price:₹{price + "/" + prefix}</Text>
+                                            <Text style={styles.productStyle}>Quantity:{quantity} {prefix}</Text>
+                                            <Text style={styles.productStyle}>Amount:₹{parseInt(price) * quantity}</Text>
                                         </View>
                                     </View>
                                 )
                             })
+                        })()
+
                         }
-                        {isprocessing ? (<ActivityIndicator color={"#000"} />) : (
+                        {isprocessing ? (<ActivityIndicator color={"#000"}/>) : (
                             <>
-                                {(OrderDetail.status == "Canceled" || OrderDetail.status == "Delivered") ? (<></>) : (
+                                {(!["Canceled", "cancelled", "delievered", "Delivered"].includes(OrderDetail.status)) && (
 
                                     <Ripple
                                         style={{
@@ -130,31 +141,7 @@ const OrderDetailsScreen = ({ navigation, }) => {
                                             justifyContent: "center",
                                             alignItems: "center"
                                         }} onPress={markDeliverleOrder}>
-                                        <Text style={{ color: "#fff", fontSize: 18 }}>Mark Delivered</Text>
-                                    </Ripple>
-                                )}
-                                {(OrderDetail.status == "Canceled" || OrderDetail.status == "Delivered") ? (<></>) : (
-
-                                    <Ripple
-                                        style={{
-                                            backgroundColor: "#f00",
-                                            width: 200, height: 50,
-                                            borderRadius: 5,
-                                            marginTop: 10,
-                                            alignSelf: "center",
-                                            justifyContent: "center",
-                                            alignItems: "center"
-                                        }} onPress={() => {
-                                            Alert.alert(
-                                                "Are your sure?",
-                                                "Are you sure you want to mark it as Canceled?",
-                                                [
-                                                    { text: "Yes", onPress: () => { markCanceledOrder() }, },
-                                                    { text: "No", },
-                                                ]
-                                            );
-                                        }}>
-                                        <Text style={{ color: "#fff", fontSize: 18 }}>Mark Canceled</Text>
+                                        <Text style={{color: "#fff", fontSize: 18}}>Mark Delivered</Text>
                                     </Ripple>
                                 )}
                             </>
@@ -171,6 +158,11 @@ const OrderDetailsScreen = ({ navigation, }) => {
 export default OrderDetailsScreen
 
 const styles = StyleSheet.create({
-
-    text:{ fontSize: 27, color:"#000", fontWeight:"bold", marginVertical:10, textAlign:"center" }
+    productStyle:{
+        fontSize: 20,
+        color: "#000",
+        marginLeft: 0,
+        marginVertical:10
+    },
+    text: {fontSize: 27, color: "#000", fontWeight: "bold", marginVertical: 10, textAlign: "center"}
 })

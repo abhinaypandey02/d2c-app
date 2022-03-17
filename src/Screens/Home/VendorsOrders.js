@@ -146,7 +146,6 @@ const VendorsOrders = ({ navigation }) => {
 
                     </View>)}
                 </ScrollView>
-                <VendorFooter navigation={navigation} />
             </View>
         </>
     );
