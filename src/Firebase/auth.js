@@ -23,7 +23,11 @@ const firebaseConfig = {
 export function getCurrentUserAuth(){
     if(firebase.apps.length===0){
         firebase.initializeApp(firebaseConfig);
-        return null;
+        try{
+            if(auth().currentUser) return auth().currentUser
+        } catch (e) {
+            return null;
+        }
     } else {
         if(auth().currentUser) return auth().currentUser
     }
