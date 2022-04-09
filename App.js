@@ -17,6 +17,7 @@ import {
     getB2BOrders,
     getB2BUsers
 } from "./src/Redux/Actions";
+import firebase from "@react-native-firebase/app";
 import auth from "@react-native-firebase/auth";
 import {SET_LOADING_PROGRESS} from "./src/Redux/ActionTypes";
 
@@ -37,14 +38,44 @@ export async function reload(user){
     store.dispatch({type:SET_LOADING_PROGRESS,payload:0})
 
 }
+const firebaseConfig = {
+
+    apiKey: "AIzaSyDuXOGANdHY4QHl-0ChxAuAFouzGZwiSqc",
+
+    authDomain: "freshtables-5ca16.firebaseapp.com",
+
+    databaseURL: "https://freshtables-5ca16-default-rtdb.firebaseio.com",
+
+    projectId: "freshtables-5ca16",
+
+    storageBucket: "freshtables-5ca16.appspot.com",
+
+    messagingSenderId: "893322883008",
+
+    appId: "1:893322883008:web:cec382858c5c91e5c06225",
+
+    measurementId: "G-B5T77PJF2X"
+
+};
 
 
 const App = () => {
+
   useEffect(() => {
-    fetchCategories();
-    auth().onAuthStateChanged((user)=>{
-        reload();
-    })
+      if(firebase.apps.length===0){
+          firebase.initializeApp(firebaseConfig).then(()=>{
+              fetchCategories();
+              auth().onAuthStateChanged((user)=>{
+                  reload();
+              })
+          });
+      } else {
+          fetchCategories();
+          auth().onAuthStateChanged((user)=>{
+              reload();
+          })
+      }
+
   }, [])
   const fetchCategories = () => {
     database()
