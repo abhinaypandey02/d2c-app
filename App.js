@@ -62,19 +62,10 @@ const firebaseConfig = {
 const App = () => {
 
   useEffect(() => {
-      if(firebase.apps.length===0){
-          firebase.initializeApp(firebaseConfig).then(()=>{
-              fetchCategories();
-              auth().onAuthStateChanged((user)=>{
-                  reload();
-              })
-          });
-      } else {
-          fetchCategories();
-          auth().onAuthStateChanged((user)=>{
-              reload();
-          })
-      }
+      fetchCategories();
+      auth().onAuthStateChanged((user)=>{
+          reload();
+      })
 
   }, [])
   const fetchCategories = () => {
